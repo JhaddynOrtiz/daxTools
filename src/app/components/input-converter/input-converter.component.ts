@@ -243,8 +243,7 @@ export class InputConverterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const authUser = this.authService.isAuth();
-    this.userInfo = authUser;
-    console.log('auth user ', authUser);
+    /* const authUser = this.authService.isAuth();
+    this.userInfo = authUser; */
   }
 }

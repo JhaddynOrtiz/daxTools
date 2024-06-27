@@ -48,7 +48,7 @@
 
       </ul>
       <div class="d-flex">
-        <h5 *ngIf="userInfo[0]?.email; else loginTemplate">{{userInfo[0]?.email}}</h5>
+        <button *ngIf="user$ | async as user; else loginTemplate" (click)="singOut()">{{ user.email }}</button>
         <ng-template #loginTemplate>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">

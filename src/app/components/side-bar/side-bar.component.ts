@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { AuthServiceService } from '../../services/auth-service.service';
 
@@ -8,13 +10,17 @@ import { AuthServiceService } from '../../services/auth-service.service';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
-  constructor(private authService: AuthServiceService) { }
+  constructor(private authService: AuthServiceService, private router: Router) { }
 
   userInfo: any = '';
+  user$!: Observable<any>;
   ngOnInit() {
-    const authUser = this.authService.isAuth();
-    this.userInfo = authUser;
-    console.log('auth user ', authUser);
+    this.user$ = this.authService.getUser();
+  }
 
+  singOut() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['login']);
+    });
   }
 }

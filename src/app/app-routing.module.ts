@@ -8,12 +8,14 @@ import { ComparerComponent } from './components/comparer/comparer.component';
 import { ValidationComponent } from './components/validation/validation.component';
 import { DeployComponent } from './components/deploy/deploy.component';
 
+import { authGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'convert', component: InputConverterComponent },
-  { path: 'comparer', component: ComparerComponent },
-  { path: 'validation', component: ValidationComponent },
-  { path: 'deploy', component: DeployComponent },
+  { path: 'convert', component: InputConverterComponent, canActivate: [authGuard] },
+  { path: 'comparer', component: ComparerComponent, canActivate: [authGuard] },
+  { path: 'validation', component: ValidationComponent, canActivate: [authGuard] },
+  { path: 'deploy', component: DeployComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'production-list', component: ProductionTaskListComponent }
 ];

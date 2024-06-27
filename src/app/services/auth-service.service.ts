@@ -1,53 +1,59 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, Auth } from "firebase/auth";
+import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
+  private auth: Auth;
 
-  constructor(public fbAuth: AngularFireAuth) { }
+  constructor(private fbAuth: AngularFireAuth, private router: Router) {
+    this.auth = getAuth();
+  }
 
   emailUser: string = '';
 
-  autentication(email: string, password: string) {
-    const auth = getAuth();
-    const response: any[] = [];
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {;
+  login(email: string, password: string): Promise<any> {
+    return signInWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential) => {
         const user = userCredential.user;
-        console.log('user', user);
-        response.push(user);
+        return user;
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        response.push(error);
+        throw error;
       });
-    return response
   }
 
-  isAuth() {
+  async logout(): Promise<void> {
+    return this.fbAuth.signOut()
+      .catch(error => console.error("Logout error: ", error));
+  }
+
+  getUser(): Observable<any> {
+    return this.fbAuth.authState;
+  }
+
+  isAuth(userData: string): any {
     const auth = getAuth();
     const response: any[] = [];
-    onAuthStateChanged(auth, (user) => {
-      console.log('auth');
-      
-      if (user) {
-        /* const uid = user.uid;
-        const email = user.email;
-        this.emailUser = email ? email : ''; */
-        console.log('user ', user);
-        response.push(user);
-        
-      } else {
-        response.push({
-          "message": "not found user"
-        });
-      }
-    });
-    return response;
+    if (userData == '') {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log('user ', user);
+          response.push(user);
+
+        } else {
+          response.push({
+            "message": "not found user"
+          });
+        }
+      });
+      return response;
+    }
   }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthServiceService } from '../../services/auth-service.service';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,17 +10,36 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 })
 export class LoginComponent {
 
-  constructor(public authService: AuthServiceService, private router: Router){}
+  constructor(public authService: AuthServiceService, private router: Router) { }
 
   email: string = '';
-  password: string = ''; 
+  password: string = '';
+  errorMessage: string = '';
 
   onLogin() {
-    console.log(this.email, this.password);
-    const credentials = this.authService.autentication(this.email, this.password);
-    if(credentials) {
-      console.log('credentials', credentials);
+    this.authService.login(this.email, this.password)
+      .then((user) => {
+        this.router.navigate(['/convert']);
+        console.log('wellcome user', user);
+      }).catch((error) => {
+        this.errorMessage = error.message;
+        console.log('error -> ', error);        
+        Swal.fire({
+          title: "Error",
+          text: "credenciales invalidas",
+          icon: "error"
+        });
+      });
+
+    /* if (credentials[0].code?.includes('invalid')) {
+      Swal.fire({
+        title: "Error",
+        text: "Email y/o passwor erroneos",
+        icon: "error"
+      });
+    } else {
       this.router.navigate(['/convert']);
-    }
+    } */
+
   }
 }
