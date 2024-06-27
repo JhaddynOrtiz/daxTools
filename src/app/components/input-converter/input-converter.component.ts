@@ -182,7 +182,7 @@ export class InputConverterComponent implements OnInit, OnDestroy {
       switchMap(() => this.apifyService.getTaskRunResults(this.runId))
     ).subscribe(response => {
       this.logs = response;
-      if (this.logs.includes('QA Validation Complete')) {
+      if (this.logs.includes('Cheerio Scraper finished') || this.logs.includes('The Actor run was aborted')) {
         this.stopLogPolling();
       }
     }, error => {

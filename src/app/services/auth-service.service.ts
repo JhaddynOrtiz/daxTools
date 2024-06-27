@@ -15,13 +15,10 @@ export class AuthServiceService {
     const auth = getAuth();
     const response: any[] = [];
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
+      .then((userCredential) => {;
         const user = userCredential.user;
         console.log('user', user);
-        response.push(user)
-
-        // ...
+        response.push(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -36,6 +33,8 @@ export class AuthServiceService {
     const auth = getAuth();
     const response: any[] = [];
     onAuthStateChanged(auth, (user) => {
+      console.log('auth');
+      
       if (user) {
         /* const uid = user.uid;
         const email = user.email;

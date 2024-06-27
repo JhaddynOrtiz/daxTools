@@ -51,7 +51,7 @@ export class DeployComponent implements OnDestroy {
       switchMap(() => this.apifyService.getTaskRunResults(this.runId))
     ).subscribe(response => {
       this.logs = response;
-      if (this.logs.includes('QA Validation Complete')) {
+      if (this.logs.includes('TotalSuccess') || this.logs.includes('Request failed')) {
         this.stopLogPolling();
       }
     }, error => {
