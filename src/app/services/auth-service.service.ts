@@ -1,20 +1,41 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, Auth } from "firebase/auth";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+
+export interface User {
+  uid: string;
+  apifyToken: string;
+  apifyUserId: string;
+  userName: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
   private auth: Auth;
+  user$: Observable<User | any>;
 
-  constructor(private fbAuth: AngularFireAuth, private router: Router) {
+  constructor(private fbAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
     this.auth = getAuth();
+
+    this.user$ = this.fbAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`user/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
   }
+  
 
   emailUser: string = '';
 
@@ -35,7 +56,10 @@ export class AuthServiceService {
   }
 
   getUser(): Observable<any> {
-    return this.fbAuth.authState;
+    const userx = this.fbAuth.authState;
+    console.log('userx', userx);
+    
+    return userx;
   }
 
   isAuth(userData: string): any {

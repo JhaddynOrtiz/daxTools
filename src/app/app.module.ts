@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { LoginComponent } from './components/login/login.component';
 import { ProductionTaskListComponent } from './components/production-task-list/production-task-list.component';
 import { AgGridModule } from 'ag-grid-angular';
@@ -91,6 +92,7 @@ firebase.initializeApp(environment.firebaseConfig);
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     AgGridModule,
     HttpClientModule,

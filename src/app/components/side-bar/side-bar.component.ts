@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService, User } from '../../services/auth-service.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { AuthServiceService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -10,12 +10,18 @@ import { AuthServiceService } from '../../services/auth-service.service';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
-  constructor(private authService: AuthServiceService, private router: Router) { }
+  user$: Observable<User | any>;
+
+  constructor(private authService: AuthServiceService, private router: Router) {
+    this.user$ = this.authService.user$;
+  }
 
   userInfo: any = '';
-  user$!: Observable<any>;
+  /* user$!: Observable<any>; */
   ngOnInit() {
-    this.user$ = this.authService.getUser();
+    /* this.user$ = this.authService.getUser(); */
+    console.log('user xXx', this.user$);
+    
   }
 
   singOut() {
