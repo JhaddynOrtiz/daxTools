@@ -1,16 +1,14 @@
-
-
 .navbar-prim {
     background-color: #111826;
     color: #FFFFFF;
 }
 
 .text-title {
-    font-weight: bolder; 
+    font-weight: bolder;
     color: #E94A6A;
 }
 
-.text-prim { 
+.text-prim {
     color: #E94A6A;
 }
 
@@ -19,6 +17,12 @@
 }
 
 .custom-dropdown .dropdown-item:hover {
-    --bs-dropdown-link-hover-bg: #111826; /* Ajusta el color según tus necesidades */
-    background-color: var(--background-terc); /* Aplicar el color */
-  }
+    --bs-dropdown-link-hover-bg: #111826;
+    /* Ajusta el color según tus necesidades */
+    background-color: var(--background-terc);
+    /* Aplicar el color */
+}
+
+.btn-user {
+    color: #FFFFFF;
+}

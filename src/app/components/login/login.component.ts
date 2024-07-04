@@ -20,7 +20,6 @@ export class LoginComponent {
     this.authService.login(this.email, this.password)
       .then((user) => {
         this.router.navigate(['/convert']);
-        console.log('wellcome user', user);
       }).catch((error) => {
         this.errorMessage = error.message;
         console.log('error -> ', error);        
@@ -30,16 +29,6 @@ export class LoginComponent {
           icon: "error"
         });
       });
-
-    /* if (credentials[0].code?.includes('invalid')) {
-      Swal.fire({
-        title: "Error",
-        text: "Email y/o passwor erroneos",
-        icon: "error"
-      });
-    } else {
-      this.router.navigate(['/convert']);
-    } */
 
   }
 }

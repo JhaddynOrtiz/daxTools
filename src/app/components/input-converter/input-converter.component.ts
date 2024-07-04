@@ -25,7 +25,7 @@ export class InputConverterComponent implements OnInit, OnDestroy {
   jsonData: any = '';
 
   cs_QAToken: string = 'GTLDwzJnfTMQqgBR4';
-  token: string = 'apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W';
+  //token: string = 'apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W';
   taskId!: string;
   runId!: string;
   logUrl!: string;
@@ -42,9 +42,16 @@ export class InputConverterComponent implements OnInit, OnDestroy {
     private apifyService: ApifyService,
     private modalService: NgbModal) {
     this.jsonModal = JSON.stringify(null, null, 2);
+
   }
 
   codeEditorOptionsHtml = {
+    theme: 'vs-dark',
+    language: 'json',
+    automaticLayout: true
+  };
+
+  codeEditorOptionsHtml2 = {
     theme: 'vs-dark',
     language: 'json',
     automaticLayout: true
@@ -81,8 +88,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
           updaterList.push(newData);
         }
       }
-      this.codeHtml2 = updaterList;
-      this.jsonModal = JSON.stringify({ "startUrls": this.codeHtml2 }, null, 2);
+      //this.codeHtml2 = updaterList;
+      this.codeHtml2 = JSON.stringify({ "startUrls": updaterList }, null, 2);
+      this.jsonModal = this.codeHtml2;
       // read state user  console.log('state ', this.fbAuth.user);
     } catch (error) {
       Swal.fire({
@@ -192,7 +200,8 @@ export class InputConverterComponent implements OnInit, OnDestroy {
 
   sendRequest() {
     try {
-      this.jsonData = JSON.parse(this.jsonModal);
+      //this.jsonData = JSON.parse(this.jsonModal);
+      this.jsonData = JSON.parse(this.codeHtml2);
       this.logs = null;
     } catch (error) {
       Swal.fire({
@@ -208,7 +217,8 @@ export class InputConverterComponent implements OnInit, OnDestroy {
         icon: "error"
       });
     } else {
-      this.apifyService.runTaskUpdater(JSON.parse(this.jsonModal), this.urlTask).subscribe(
+      //this.apifyService.runTaskUpdater(JSON.parse(this.jsonModal), this.urlTask).subscribe(
+      this.apifyService.runTaskUpdater(JSON.parse(this.codeHtml2), this.urlTask).subscribe(
         (response) => {
           this.closeModal();
           this.runId = response.data.id;

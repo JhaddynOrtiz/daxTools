@@ -52,10 +52,16 @@
                 </div>
             </div>
             <div class="col-md-6">
+                <div class="editor-container">
+                    <ngx-monaco-editor class="my-code-editor" [options]="codeEditorOptionsHtml2"
+                        [(ngModel)]="codeHtml2"></ngx-monaco-editor>
+                </div>
+            </div>
+            <!-- <div class="col-md-6">
                 <div class="json-viewer-container">
                     <ngx-json-viewer *ngIf="codeHtml2 !== ''" [json]="codeHtml2"></ngx-json-viewer>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <br><br>
@@ -103,7 +109,7 @@
         </div>
         <div class="mb-3">
             <label for="startUrls" class="form-label text-white">startUrls</label>
-            <textarea class="form-control input-color" id="startUrls" rows="10" [(ngModel)]="jsonModal"></textarea>
+            <textarea class="form-control input-color" id="startUrls" rows="10" [(ngModel)]="codeHtml2"></textarea>
         </div>
     </div>
     <div class="modal-footer footer-sec">

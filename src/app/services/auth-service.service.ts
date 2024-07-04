@@ -28,14 +28,19 @@ export class AuthServiceService {
     this.user$ = this.fbAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`user/${user.uid}`).valueChanges();
+          //this.setToken()
+          const infoUser = this.afs.doc<User>(`user/${user.uid}`).valueChanges();
+          /* infoUser.subscribe(myUser => {
+            console.log('user', myUser);
+          }); */
+          return infoUser;
         } else {
           return of(null);
         }
       })
     );
   }
-  
+
 
   emailUser: string = '';
 
@@ -43,6 +48,9 @@ export class AuthServiceService {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        this.user$.subscribe(myUser => {
+          this.setToken(myUser.apifyToken);
+        });
         return user;
       })
       .catch((error) => {
@@ -51,14 +59,17 @@ export class AuthServiceService {
   }
 
   async logout(): Promise<void> {
+    localStorage.removeItem('authToken');
+    
     return this.fbAuth.signOut()
       .catch(error => console.error("Logout error: ", error));
+
   }
 
   getUser(): Observable<any> {
     const userx = this.fbAuth.authState;
     console.log('userx', userx);
-    
+
     return userx;
   }
 
@@ -80,4 +91,16 @@ export class AuthServiceService {
       return response;
     }
   }
+
+  setToken(token: any): void {
+    localStorage.setItem('authToken', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
+  /* removeToken(): void {
+    localStorage.removeItem('authToken');
+  } */
 }

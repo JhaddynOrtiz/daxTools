@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ApifyService {
 
   private apiUrl = 'https://api.apify.com/v2/acts';
-  private token = 'apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W';
+  private token: any = '';
   private body = {
     "CheckDuplicates": {
       "ProductUrl": true,
@@ -70,16 +70,9 @@ export class ApifyService {
     "debugLog": false
   }
 
-  constructor(private http: HttpClient) { }
-
-  /* runTask(taskId: string): Observable<any> {
-    const url = `https://api.apify.com/v2/actor-tasks/cs_qa~cs-qa-validation/runs?token=apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W`;
-    //https://api.apify.com/v2/actor-tasks/cs_qa~cs-qa-validation/runs?token=apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post(url, JSON.stringify(this.body), { headers });
-  } */
+  constructor(private http: HttpClient) { 
+    this.token = localStorage.getItem('authToken');
+  }
 
   runTask(taskId: string): Observable<any> {
 
@@ -106,8 +99,4 @@ export class ApifyService {
     return this.http.get(url, { responseType: 'text' });
   }
 
-  /* getTaskRunResults(taskId: string, runId: string): Observable<any> {
-    const url = "https://api.apify.com/v2/actor-runs/cJkbGpLzcfkyipdzj?token=apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W";
-    return this.http.get(url);
-  } */
 }
