@@ -92,14 +92,18 @@ export class DeployComponent implements OnDestroy {
             Swal.fire({
               title: "La tarea se envió a ejecutar!",
               text: "Check last run",
-              icon: "success"
+              icon: "success",
+              background: "#131e33",
+              color: "#FFF"
             });
             this.startLogPolling();
           } else {
             Swal.fire({
               title: "Error!!!",
               text: response,
-              icon: "error"
+              icon: "error",
+              background: "#131e33",
+              color: "#FFF"
             });
           }
         },
@@ -107,7 +111,9 @@ export class DeployComponent implements OnDestroy {
           Swal.fire({
             title: "Error!!!",
             text: error.message,
-            icon: "error"
+            icon: "error",
+            background: "#131e33",
+            color: "#FFF"
           });
         }
       )
@@ -115,7 +121,9 @@ export class DeployComponent implements OnDestroy {
       Swal.fire({
         title: "Error!",
         text: "Llena los campos para ejecutar la prueba de validación",
-        icon: "error"
+        icon: "error",
+        background: "#131e33",
+        color: "#FFF"
       });
     }
   }

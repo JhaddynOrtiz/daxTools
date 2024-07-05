@@ -2,7 +2,6 @@
 @import 'ag-grid-community/styles/ag-theme-alpine.css'; 
 
 body {
-    /* background-color: #111826 !important; */
     background-color: #141C2E !important;
 }
 
@@ -24,15 +23,12 @@ body {
     --ngx-json-undefined-key: #cacaca;
     --ngx-json-font-family: 'Courier New', Courier, monospace;
     --ngx-json-font-size: 14px;
-
     --button-prim: #E94A6A;
     --button-sec: #D73354;
-
     --background-prim: #111826;
     --background-sec: #161D2F;
     --background-terc: #141C2C;
     --lines-hr: #30405f;
-
     --icons-prim: #4ECFC5;
 }
 

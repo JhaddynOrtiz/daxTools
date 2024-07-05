@@ -22,11 +22,13 @@ export class LoginComponent {
         this.router.navigate(['/convert']);
       }).catch((error) => {
         this.errorMessage = error.message;
-        console.log('error -> ', error);        
+        console.log('error -> ', error);
         Swal.fire({
           title: "Error",
           text: "credenciales invalidas",
-          icon: "error"
+          icon: "error",
+          background: "#131e33",
+          color: "#FFF"
         });
       });
 

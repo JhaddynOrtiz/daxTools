@@ -132,7 +132,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
         icon: "success",
         title: "Texto copiado",
         showConfirmButton: false,
-        timer: 1000
+        timer: 1000,
+        background: "#131e33",
+        color: "#FFF"
       });
     }).catch(err => {
       Swal.fire({
@@ -140,7 +142,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
         icon: "error",
         title: "No se encontró la URL",
         showConfirmButton: false,
-        timer: 1000
+        timer: 1000,
+        background: "#131e33",
+        color: "#FFF"
       });
     });
   }
@@ -153,7 +157,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
         icon: "success",
         title: "Texto copiado",
         showConfirmButton: false,
-        timer: 1000
+        timer: 1000,
+        background: "#131e33",
+        color: "#FFF"
       });
     } else {
       Swal.fire({
@@ -161,7 +167,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
         icon: "error",
         title: "No se encontró el JSON",
         showConfirmButton: false,
-        timer: 1000
+        timer: 1000,
+        background: "#131e33",
+        color: "#FFF"
       });
     }
   }
@@ -207,14 +215,18 @@ export class InputConverterComponent implements OnInit, OnDestroy {
       Swal.fire({
         title: "Error de formato del JSON",
         text: "Revisa que noexistan caracteres adicionales en el contenido de startUrls",
-        icon: "error"
+        icon: "error",
+        background: "#131e33",
+        color: "#FFF"
       });
     }
     if (!this.urlTask) {
       Swal.fire({
         title: "Agregue la url de la solicitud",
         text: "Debes agregar la url de Run Task",
-        icon: "error"
+        icon: "error",
+        background: "#131e33",
+        color: "#FFF"
       });
     } else {
       //this.apifyService.runTaskUpdater(JSON.parse(this.jsonModal), this.urlTask).subscribe(
@@ -227,7 +239,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
           Swal.fire({
             title: "La tarea se envió a ejecutar!",
             text: "Check last run",
-            icon: "success"
+            icon: "success",
+            background: "#131e33",
+            color: "#FFF"
           });
           this.startLogPolling();
         },
@@ -235,7 +249,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
           Swal.fire({
             title: "Ocurrió un problema al realziar la solicitud",
             text: error.message,
-            icon: "error"
+            icon: "error",
+            background: "#131e33",
+            color: "#FFF"
           });
         }
       )

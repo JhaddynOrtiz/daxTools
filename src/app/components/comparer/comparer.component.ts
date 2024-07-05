@@ -70,7 +70,9 @@ export class ComparerComponent {
       Swal.fire({
         title: "Error uno o ambos contenedores vacíos",
         text: "Llena los campos de Resultados",
-        icon: "error"
+        icon: "error",
+        background: "#131e33",
+        color: "#FFF"
       });
     }
     else {
@@ -81,7 +83,9 @@ export class ComparerComponent {
         Swal.fire({
           title: "Error de formato",
           text: "No se pudo convertir a JSON revisa los contenedores",
-          icon: "error"
+          icon: "error",
+          background: "#131e33",
+        color: "#FFF"
         });
       } else {
         crawler.forEach((item: any) => this.compararDatos(item, updater));
