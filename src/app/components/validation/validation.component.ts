@@ -21,6 +21,7 @@ export class ValidationComponent implements OnDestroy {
   token: string = 'apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W';
   logUrl!: string;
   logs: any = '';
+  loadingbutton: boolean = false;
 
   logSubscription: any = new Subscription;
 
@@ -124,11 +125,13 @@ export class ValidationComponent implements OnDestroy {
     };
 
     if (this.form.valid) {
+      this.loadingbutton = true;
       const TokenApify = "apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W"
 
       const urlRequest = `https://api.apify.com/v2/actor-tasks/cs_qa~cs-qa-validation/runs?token=${TokenApify}`;
       this.apifyService.runTaskUpdater(body, urlRequest).subscribe(
         (response) => {
+          this.loadingbutton = false;
           if (response.data && response.data.id) {
             this.runId = response.data.id;
             this.logUrl = `https://console.apify.com/organization/${this.cs_QAToken}/actors/tasks/XETtJl5o4ddH0I1Sg/runs/${this.runId}#log`;
@@ -173,7 +176,15 @@ export class ValidationComponent implements OnDestroy {
 
   copyUrl() {
     navigator.clipboard.writeText(this.logUrl).then(() => {
-      console.log('URL copied to clipboard');
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Texto copiado",
+        showConfirmButton: false,
+        timer: 1000,
+        background: "#131e33",
+        color: "#FFF"
+      });
     }).catch(err => {
       console.error('Failed to copy: ', err);
     });

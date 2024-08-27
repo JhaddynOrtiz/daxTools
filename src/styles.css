@@ -1,5 +1,5 @@
-@import 'ag-grid-community/styles/ag-grid.css'; 
-@import 'ag-grid-community/styles/ag-theme-alpine.css'; 
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 body {
     background-color: #141C2E !important;
@@ -46,6 +46,12 @@ body {
 
 .my-debug {
     color: rgb(1, 160, 228) !important;
+}
+
+.my-url {
+    color: rgb(111, 157, 255) !important;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .custom-modal .modal-dialog {

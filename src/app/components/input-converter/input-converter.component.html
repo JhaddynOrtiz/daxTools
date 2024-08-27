@@ -114,6 +114,12 @@
     </div>
     <div class="modal-footer footer-sec">
         <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Close</button>
-        <button type="button" class="btn button-prim" (click)="sendRequest()">Run Task</button>
+        <button *ngIf="!loadingbutton; else spinnerButton" type="button" class="btn button-prim" (click)="sendRequest()">Run Task</button>
+        <ng-template #spinnerButton>
+            <button type="button" class="btn button-prim" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </button>
+        </ng-template>
     </div>
 </ng-template>

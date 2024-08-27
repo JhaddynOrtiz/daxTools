@@ -62,7 +62,13 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn button-prim button-send" type="submit">Run Validation</button>
+                    <button *ngIf="!loadingbutton; else spinnerButton" class="btn button-prim button-send" type="submit">Run Validation</button>
+                    <ng-template #spinnerButton>
+                        <button type="button" class="btn button-prim button-send" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </ng-template>
                 </div>
             </form>
         </div>

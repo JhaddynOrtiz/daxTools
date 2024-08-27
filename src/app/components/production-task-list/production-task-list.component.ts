@@ -19,10 +19,14 @@ export class ProductionTaskListComponent {
 
   columnDefs = [
     { headerName: 'ID', field: 'id' },
+    { headerName: 'Name', field: 'title' },
+    { headerName: 'Actor', field: 'actUsername' },
+    { headerName: 'Runs', field: 'stats.totalRuns' },
+    { headerName: 'Last run', field: 'stats.lastRunStartedAt' },
     // ... other columns
   ];
 
-  constructor(private actorTasksService: TaskService) {}
+  constructor(private tasksService: TaskService) {}
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
@@ -36,10 +40,13 @@ export class ProductionTaskListComponent {
   loadData(page: number, offset?: number) {
     this.loadingData = true;
     const limit = this.paginationPageSize;
+    //href="/organization/GTLDwzJnfTMQqgBR4/actors/tasks/517HaWwjqOSNnCGXA"
+    //https://api.apify.com/v2/actor-tasks/cs_qa~ua-existua-hc/run-sync?token=apify_api_Q4q60TiTquK8bxxcJe1luBgwoce66X0fNM5W
 
-    this.actorTasksService.getActorTasks(offset ? offset : 0, limit).subscribe(
+    this.tasksService.getActorTasks(offset ? offset : 0, limit).subscribe(
       (data: any) => {
         const { items, total } = data.data;
+        console.log("data of services xxx", data);
         this.rowData = items;
         this.totalData = total;
         this.totalPages = Math.ceil(total / this.paginationPageSize);

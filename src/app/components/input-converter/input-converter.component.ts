@@ -56,7 +56,8 @@ export class InputConverterComponent implements OnInit, OnDestroy {
     language: 'json',
     automaticLayout: true
   };
-
+  //organization : GTLDwzJnfTMQqgBR4
+  //task : SJhWZas67BtcFdohc
 
   showJsonViewer: boolean = false;
   codeHtml: any = ``;
@@ -65,6 +66,7 @@ export class InputConverterComponent implements OnInit, OnDestroy {
   productId: boolean = false;
   codeHtml2: any = '';
   crawlerOutput: any;
+  loadingbutton: boolean = false;
 
   urlTask: string = '';
   startUrls: any = '';
@@ -207,6 +209,7 @@ export class InputConverterComponent implements OnInit, OnDestroy {
   }
 
   sendRequest() {
+    this.loadingbutton = true;
     try {
       //this.jsonData = JSON.parse(this.jsonModal);
       this.jsonData = JSON.parse(this.codeHtml2);
@@ -229,9 +232,9 @@ export class InputConverterComponent implements OnInit, OnDestroy {
         color: "#FFF"
       });
     } else {
-      //this.apifyService.runTaskUpdater(JSON.parse(this.jsonModal), this.urlTask).subscribe(
       this.apifyService.runTaskUpdater(JSON.parse(this.codeHtml2), this.urlTask).subscribe(
         (response) => {
+          this.loadingbutton = false;
           this.closeModal();
           this.runId = response.data.id;
           this.taskId = response.data.actorTaskId;

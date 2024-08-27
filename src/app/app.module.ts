@@ -32,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { DeployComponent } from './components/deploy/deploy.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { JseditorComponent } from './components/jseditor/jseditor.component';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -81,7 +82,8 @@ firebase.initializeApp(environment.firebaseConfig);
     HighlightTextPipe,
     TruncatePipe,
     DeployComponent,
-    ProfileComponent
+    ProfileComponent,
+    JseditorComponent
   ],
   imports: [
     BrowserModule,

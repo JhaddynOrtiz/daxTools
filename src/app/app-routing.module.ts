@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ComparerComponent } from './components/comparer/comparer.component';
 import { ValidationComponent } from './components/validation/validation.component';
 import { DeployComponent } from './components/deploy/deploy.component';
+import { JseditorComponent } from './components/jseditor/jseditor.component';
 
 import { authGuard } from './guards/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -14,6 +15,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'convert', component: InputConverterComponent, canActivate: [authGuard] },
+  { path: 'editor', component: JseditorComponent, canActivate: [authGuard] },
   { path: 'comparer', component: ComparerComponent, canActivate: [authGuard] },
   { path: 'validation', component: ValidationComponent, canActivate: [authGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
