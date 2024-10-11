@@ -1,0 +1,66 @@
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+body {
+    background-color: #141C2E !important;
+}
+
+:root {
+    --ngx-json-string: #4ECFC5;
+    --ngx-json-number: #ffffff;
+    --ngx-json-boolean: #fd971f;
+    --ngx-json-date: #e6db74;
+    --ngx-json-array: #66d9ef;
+    --ngx-json-object: #e6f8ff;
+    --ngx-json-function: #f92672;
+    --ngx-json-null: #f92672;
+    --ngx-json-null-bg: #3e3d32;
+    --ngx-json-undefined: #75715e;
+    --ngx-json-toggler: #E94A6A;
+    --ngx-json-key: #E94A6A;
+    --ngx-json-separator: #D73354;
+    --ngx-json-value: #4ECFC5;
+    --ngx-json-undefined-key: #cacaca;
+    --ngx-json-font-family: 'Courier New', Courier, monospace;
+    --ngx-json-font-size: 14px;
+    --button-prim: #E94A6A;
+    --button-sec: #D73354;
+    --background-prim: #111826;
+    --background-sec: #161D2F;
+    --background-terc: #141C2C;
+    --lines-hr: #30405f;
+    --icons-prim: #4ECFC5;
+}
+
+.my-info {
+    color: rgb(59, 179, 88) !important;
+}
+
+.my-warn {
+    color: rgb(249, 206, 75) !important;
+}
+
+.my-error {
+    color: rgb(255, 113, 87) !important;
+}
+
+.my-debug {
+    color: rgb(1, 160, 228) !important;
+}
+
+.my-url {
+    color: rgb(111, 157, 255) !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.custom-modal .modal-dialog {
+    max-width: 60% !important;
+}
+
+.custom-modal .modal-content {
+    background-color: var(--background-sec);
+    color: #333;
+    border-radius: 10px;
+    padding: 20px;
+}

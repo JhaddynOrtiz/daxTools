@@ -1,0 +1,12 @@
+<!-- your-component.component.html -->
+<!-- production-task-list.component.html -->
+<ag-grid-angular
+  style="width: 100%; height: 500px;"
+  class="ag-theme-alpine"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [paginationPageSize]="paginationPageSize"
+  (gridReady)="onGridReady($event)"
+>
+</ag-grid-angular>

@@ -1,0 +1,125 @@
+<section>
+    <div class="title-container">
+        <br>
+        <!-- <h2>{{userInfo[0]?.email}}</h2> -->
+        <div class="container text-prim">
+            <h3>Convert Crawler to Updater</h3>
+        </div>
+        <br>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn button-prim m-1 button-right" (click)="processData()">
+                    <i class="bi bi-folder-symlink"></i> Convert
+                </button>
+                <div class="form-check form-switch form-check-inline text-white">
+                    <input class="form-check-input switch-check" [(ngModel)]="productName" type="checkbox"
+                        id="productName">
+                    <label class="form-check-label" for="productName">ProductName</label>
+                </div>
+                <div class="form-check form-switch form-check-inline text-white">
+                    <input class="form-check-input switch-check" [(ngModel)]="productId" type="checkbox" id="productId">
+                    <label class="form-check-label" for="productId">ProductId</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <button *ngIf="codeHtml2 !== ''" type="button" class="btn button-prim m-1" (click)="openModal(content)">
+                    Run Task Updater
+                </button>
+                <!-- <button *ngIf="codeHtml2 !== ''" type="button" class="btn button-prim m-1" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Run Task Updater
+                </button> -->
+
+
+                <button class="btn button-prim m-1 button-right" (click)="copyToClipboard(codeHtml2)">
+                    <i class="bi bi-copy"></i> Copy
+                </button>
+                <button class="btn button-prim text-white m-1 button-right" (click)="clearConsole()">
+                    <i class="bi bi-eraser"></i> Clean all
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="editor-container">
+                    <ngx-monaco-editor class="my-code-editor" [options]="codeEditorOptionsHtml"
+                        [(ngModel)]="codeHtml"></ngx-monaco-editor>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="editor-container">
+                    <ngx-monaco-editor class="my-code-editor" [options]="codeEditorOptionsHtml2"
+                        [(ngModel)]="codeHtml2"></ngx-monaco-editor>
+                </div>
+            </div>
+            <!-- <div class="col-md-6">
+                <div class="json-viewer-container">
+                    <ngx-json-viewer *ngIf="codeHtml2 !== ''" [json]="codeHtml2"></ngx-json-viewer>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="content-terminal">
+            <label *ngIf="!logUrl; else urlLog" class="form-label text-white">Last run log</label>
+            <ng-template #urlLog>
+                <label class="form-label text-white text-url">Run#
+                    <a target="_blank" [href]="logUrl">{{ logUrl | truncate:50}}</a>
+                </label>
+                <button class="btn button-prim button-url" (click)="copyUrl()">
+                    <i class="bi bi-copy"></i>
+                </button>
+            </ng-template>
+            <button class="btn button-prim button-right"><i class="bi bi-fullscreen"></i></button>
+            <div *ngIf="logs != null; else loading">
+                <pre class="text-white terminal-text" [innerHTML]="logs | highlightText"></pre>
+            </div>
+            <ng-template #loading>
+                <pre class="text-white terminal-text">Loading...</pre>
+            </ng-template>
+        </div>
+    </div>
+</section>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header header-sec">
+        <h5 class="modal-title text-white" id="exampleModalLabel">Run Updater with results of Crawler</h5>
+        <button type="button" class="btn close-sec" (click)="modal.dismiss('Cross click')">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-auto">
+            <label for="urlTask" class="form-label text-white">Url Task</label>
+            <div class="input-group mb-2">
+                <input type="text" class="form-control input-color" id="urlTask" [(ngModel)]="urlTask">
+                <div class="input-group-prepend">
+                    <button class="input-group-text button-clear-url" (click)="ClearUrl()"><i
+                            class="bi bi-x-circle"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="startUrls" class="form-label text-white">startUrls</label>
+            <textarea class="form-control input-color" id="startUrls" rows="10" [(ngModel)]="codeHtml2"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer footer-sec">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cross click')">Close</button>
+        <button *ngIf="!loadingbutton; else spinnerButton" type="button" class="btn button-prim" (click)="sendRequest()">Run Task</button>
+        <ng-template #spinnerButton>
+            <button type="button" class="btn button-prim" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </button>
+        </ng-template>
+    </div>
+</ng-template>

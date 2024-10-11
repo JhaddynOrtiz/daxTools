@@ -1,0 +1,59 @@
+<div class="title-container">
+    <br>
+    <!-- <h2>{{userInfo[0]?.email}}</h2> -->
+    <div class="container text-prim">
+        <h3>Crawler Updater Comparison</h3>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="title-data text-white text-left">Crawler data</p>
+            <button class="btn button-prim m-1 button-right" (click)="compareCrawlerUpdater()">
+                <i class="bi bi-code-square"></i> Compare
+            </button>
+        </div>
+        <div class="col-md-6">
+            <p class="title-data text-white text-left">Updater data</p>
+            <button class="btn button-prim text-white m-1 button-right" (click)="clearConsole()">
+                <i class="bi bi-eraser"></i> Clean all
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="editor-container">
+                <ngx-monaco-editor class="my-code-editor" [options]="codeEditorOptionsHtmlCrawler"
+                    [(ngModel)]="crawlerData"></ngx-monaco-editor>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="editor-container">
+                <ngx-monaco-editor class="my-code-editor" [options]="codeEditorOptionsHtmlUpdater"
+                    [(ngModel)]="updaterData"></ngx-monaco-editor>
+            </div>
+        </div>
+    </div>
+</div>
+<div #targetSection id="target-section" class="container">
+    <br>
+    <div class="result-compare">
+        <div class="title-result">
+            <p class="title-data text-white text-left">Results comaparison</p>
+        </div>
+        <div class="content-result">
+            <div *ngFor="let item of resultCompare">
+                <span *ngIf="item.success == true; else dangerText" class="text-console">{{ item.message }}</span>
+                <ng-template #dangerText>
+                    <span class="text-danger">{{ item.message }}</span>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>

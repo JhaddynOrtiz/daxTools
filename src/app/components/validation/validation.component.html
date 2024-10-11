@@ -1,0 +1,96 @@
+<div class="title-container">
+    <br>
+    <div class="container text-prim">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Send Validation</h3>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="row" [formGroup]="form" (ngSubmit)="sendValidation()">
+                <div class="col-md-6">
+                    <label for="validationCustom01" class="form-label text-white">Id Task</label>
+                    <input type="text" class="form-control input-color" formControlName="idTask">
+                    <div *ngIf="form.get('idTask')!.invalid && form.get('idTask')!.touched" class="text-danger">
+                        Id Task is required
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustom01" class="form-label text-white">Type Robot</label>
+                    <select class="form-select input-color" formControlName="typeRobot"
+                        aria-label="Default select example">
+                        <option selected value="crawler">Crawler</option>
+                        <option value="updater">Updater</option>
+                    </select>
+                    <div *ngIf="form.get('typeRobot')?.invalid && form.get('typeRobot')?.touched" class="text-danger">
+                        Type Robot is required
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="validationCustom02" class="form-label text-white">Manufacturer Code</label>
+                    <input type="text" class="form-control input-color" formControlName="manufacturerCode">
+                    <div *ngIf="form.get('manufacturerCode')?.invalid && form.get('manufacturerCode')?.touched"
+                        class="text-danger">
+                        Manufacturer Code is required
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="validationCustom02" class="form-label text-white">Product Url</label>
+                    <input type="text" class="form-control input-color" formControlName="productUrl">
+                    <div *ngIf="form.get('productUrl')?.invalid && form.get('productUrl')?.touched" class="text-danger">
+                        Product URL is required and should be a valid URL
+                    </div>
+                </div>
+                <div *ngIf="form.value.typeRobot == 'crawler'" class="col-md-12">
+                    <label for="validationCustom02" class="form-label text-white">Image Url</label>
+                    <input type="text" class="form-control input-color" formControlName="imageUri">
+                    <div *ngIf="form.get('imageUri')?.invalid && form.get('imageUri')?.touched" class="text-danger">
+                        Image URL is required and should be a valid URL
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustom02" class="form-label text-white">Culture Code</label>
+                    <input type="text" class="form-control input-color" formControlName="cultureCode">
+                    <div *ngIf="form.get('cultureCode')?.invalid && form.get('cultureCode')?.touched"
+                        class="text-danger">
+                        Culture Code is required
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button *ngIf="!loadingbutton; else spinnerButton" class="btn button-prim button-send" type="submit">Run Validation</button>
+                    <ng-template #spinnerButton>
+                        <button type="button" class="btn button-prim button-send" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button>
+                    </ng-template>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="content-terminal">
+                <label *ngIf="!logUrl; else urlLog" class="form-label text-white">Validation log</label>
+                <ng-template #urlLog>
+                    <label class="form-label text-white text-url">Run#
+                        <a target="_blank" [href]="logUrl">{{logUrl | truncate:50}}</a>
+                    </label>
+                    <button class="btn button-prim button-url" (click)="copyUrl()">
+                        <i class="bi bi-copy"></i>
+                    </button>
+                </ng-template>
+                <button class="btn button-prim button-right"><i class="bi bi-fullscreen"></i></button>
+                <div *ngIf="logs != null; else loading">
+                    <pre class="text-white terminal-text" [innerHTML]="logs | highlightText"></pre>
+                </div>
+                <ng-template #loading>
+                    <pre class="text-white terminal-text">Loading...</pre>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
