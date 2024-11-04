@@ -2,6 +2,20 @@
     <br>
     <div class="container text-prim">
         <div class="row">
+            <!-- <div class="col-md-6">
+                <button class="btn button-prim m-1 button-right" (click)="processData()">
+                    <i class="bi bi-folder-symlink"></i> Convert
+                </button>
+                <div class="form-check form-switch form-check-inline text-white">
+                    <input class="form-check-input switch-check" [(ngModel)]="productName" type="checkbox"
+                        id="productName">
+                    <label class="form-check-label" for="productName">ProductName</label>
+                </div>
+                <div class="form-check form-switch form-check-inline text-white">
+                    <input class="form-check-input switch-check" [(ngModel)]="productId" type="checkbox" id="productId">
+                    <label class="form-check-label" for="productId">ProductId</label>
+                </div>
+            </div> -->
             <div class="col-md-6">
                 <h3>Create Comment Dev</h3>
             </div>
@@ -13,14 +27,21 @@
     <div class="row">
         <div class="col-md-6">
             <form class="row" [formGroup]="form" (ngSubmit)="sendValidation()">
-                <div class="col-md-6">
-                    <label for="validationCustom01" class="form-label text-white">Id Task</label>
-                    <input type="text" class="form-control input-color" formControlName="idTask">
-                    <div *ngIf="form.get('idTask')!.invalid && form.get('idTask')!.touched" class="text-danger">
-                        Id Task is required
+                <div class="col-md-12">
+                    <label for="validationCustom01" class="form-label text-white">QA URL</label>
+                    <input type="text" class="form-control input-color" formControlName="QA">
+                    <div *ngIf="form.get('QA')!.invalid && form.get('QA')!.touched" class="text-danger">
+                        QA URL is required
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
+                    <label for="validationCustom01" class="form-label text-white">Production URL</label>
+                    <input type="text" class="form-control input-color" formControlName="Production">
+                    <div *ngIf="form.get('Production')!.invalid && form.get('Production')!.touched" class="text-danger">
+                        Production URL is required
+                    </div>
+                </div>
+                <!-- <div class="col-md-6">
                     <label for="validationCustom01" class="form-label text-white">Type Robot</label>
                     <select class="form-select input-color" formControlName="typeRobot"
                         aria-label="Default select example">
@@ -30,27 +51,27 @@
                     <div *ngIf="form.get('typeRobot')?.invalid && form.get('typeRobot')?.touched" class="text-danger">
                         Type Robot is required
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-12">
-                    <label for="validationCustom02" class="form-label text-white">Manufacturer Code</label>
-                    <input type="text" class="form-control input-color" formControlName="manufacturerCode">
-                    <div *ngIf="form.get('manufacturerCode')?.invalid && form.get('manufacturerCode')?.touched"
+                    <label for="validationCustom02" class="form-label text-white">Manufacturers</label>
+                    <input type="text" class="form-control input-color" formControlName="Manufacturers">
+                    <div *ngIf="form.get('Manufacturers')?.invalid && form.get('Manufacturers')?.touched"
                         class="text-danger">
-                        Manufacturer Code is required
+                        Manufacturers is required
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="validationCustom02" class="form-label text-white">Product Url</label>
-                    <input type="text" class="form-control input-color" formControlName="productUrl">
-                    <div *ngIf="form.get('productUrl')?.invalid && form.get('productUrl')?.touched" class="text-danger">
-                        Product URL is required and should be a valid URL
+                    <label for="validationCustom02" class="form-label text-white">Complementary QA Url</label>
+                    <input type="text" class="form-control input-color" formControlName="compleUrlQA">
+                    <div *ngIf="form.get('compleUrlQA')?.invalid && form.get('compleUrlQA')?.touched" class="text-danger">
+                        Complementary QA Url is required and should be a valid URL
                     </div>
                 </div>
                 <div *ngIf="form.value.typeRobot == 'crawler'" class="col-md-12">
-                    <label for="validationCustom02" class="form-label text-white">Image Url</label>
-                    <input type="text" class="form-control input-color" formControlName="imageUri">
-                    <div *ngIf="form.get('imageUri')?.invalid && form.get('imageUri')?.touched" class="text-danger">
-                        Image URL is required and should be a valid URL
+                    <label for="validationCustom02" class="form-label text-white">Complementary Production Url</label>
+                    <input type="text" class="form-control input-color" formControlName="compleUrlProd">
+                    <div *ngIf="form.get('compleUrlProd')?.invalid && form.get('compleUrlProd')?.touched" class="text-danger">
+                        Complementary Production Url is required and should be a valid URL
                     </div>
                 </div>
                 <div class="col-md-6">

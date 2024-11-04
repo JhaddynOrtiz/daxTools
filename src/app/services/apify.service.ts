@@ -100,5 +100,14 @@ export class ApifyService {
     const url = `https://api.apify.com/v2/logs/${runId}?token=${this.token}`;
     return this.http.get(url, { responseType: 'text' });
   }
+  
+  getQaRun(runId:string): Observable<any> {
+    const url = `https://api.apify.com/v2/logs/${runId}?token=${this.token}`;
+    return this.http.get(url, { responseType: 'json' });;
+  }
+  getProdRun(runId:string, prod: boolean): Observable<any> {    
+    const url = `https://api.apify.com/v2/logs/${runId}?token=${prod ? this.prodToken : this.token}`;
+    return this.http.get(url, { responseType: 'json' });
+  }
 
 }

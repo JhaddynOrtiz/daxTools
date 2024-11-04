@@ -11,6 +11,7 @@ import { JseditorComponent } from './components/jseditor/jseditor.component';
 
 import { authGuard } from './guards/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CreateCommentComponent } from './components/create-comment/create-comment.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'validation', component: ValidationComponent, canActivate: [authGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'deploy', component: DeployComponent, canActivate: [authGuard] },
+  { path: 'comment', component: CreateCommentComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'production-list', component: ProductionTaskListComponent }
 ];

@@ -7,7 +7,7 @@ import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import Swal from 'sweetalert2';
-import { Functions } from 'src/app/functions/compare';
+import { FunctionsService } from 'src/app/services/functions.service';
 @Component({
   selector: 'app-create-comment',
   templateUrl: './create-comment.component.html',
@@ -28,7 +28,7 @@ export class CreateCommentComponent {
 
   constructor(
     private apifyService: ApifyService, 
-    private functionServ: Functions
+    private functionServ: FunctionsService
   ) {
 
     this.form = new FormGroup({
@@ -37,8 +37,7 @@ export class CreateCommentComponent {
       Production: new FormControl('', [Validators.pattern('https?://.+')]),
       compleUrlProd: new FormControl('', [Validators.required, Validators.pattern('https?://.+')]),
       compleUrlQA: new FormControl('', [Validators.pattern('https?://.+')]),
-      compVal: new FormControl(false, [Validators.required]),
-      ImageUri: new FormControl('', [Validators.pattern('https?://.+')])
+      cultureCode: new FormControl('', [Validators.required]),
     });
   }
 

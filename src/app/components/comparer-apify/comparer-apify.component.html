@@ -1,0 +1,62 @@
+<section>
+    <div class="title-container">
+        <br>
+        <div class="container text-prim">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Send Deploy</h3>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form class="row" [formGroup]="form" (ngSubmit)="comparison()">
+                <!-- <form class="row"> -->
+                    <div class="col-md-12">
+                        <label for="validationCustom02" class="form-label text-white">CS_QA URL</label>
+                        <input type="text" class="form-control input-color" formControlName="csQaUrl">
+                        <div *ngIf="form.get('csQaUrl')?.invalid && form.get('csQaUrl')?.touched"
+                            class="text-danger">
+                            CS_QA URL is required
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="validationCustom02" class="form-label text-white">Production URL</label>
+                        <input type="text" class="form-control input-color" formControlName="productionUrl">
+                        <div *ngIf="form.get('productionUrl')?.invalid && form.get('productionUrl')?.touched"
+                            class="text-danger">
+                            Production Url is required
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn button-prim button-send" type="submit">Run Comparison</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="content-terminal">
+                    <!-- <label *ngIf="!logUrl; else urlLog" class="form-label text-white">Comparison Result</label>
+                    <ng-template #urlLog>
+                        <label class="form-label text-white text-url">Run#
+                            <a target="_blank" [href]="logUrl">{{logUrl | truncate:50}}</a>
+                        </label>
+                        <button class="btn button-prim button-url" (click)="copyUrl()">
+                            <i class="bi bi-copy"></i>
+                        </button>
+                    </ng-template> -->
+                    <button class="btn button-prim button-right"><i class="bi bi-fullscreen"></i></button>
+                    <div *ngIf="logs != null; else loading">
+                        <pre class="text-white terminal-text" [innerHTML]="logs | highlightText"></pre>
+                    </div>
+                    <ng-template #loading>
+                        <pre class="text-white terminal-text">Loading...</pre>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
